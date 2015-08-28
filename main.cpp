@@ -20,6 +20,11 @@ void TestFunction(int i, double d)
 	cout << "TestFunction (" << i << ", " << d << ") called" << endl;
 }
 
+void Foo()
+{
+	cout << "Foo" << endl;
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -35,11 +40,12 @@ int main(int argc, char* argv[])
 		++a;
 		cout << a << endl;
 	});
-	
+
+
 	fn(4, 3.5);
 	mf(5);
 	lambda(3);
-	
+
 
 	return 0;
 }

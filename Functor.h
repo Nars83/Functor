@@ -3,14 +3,16 @@
 #include <memory>
 #include <tuple>
 
-template <typename R, typename ... Args>
+template <typename Ret, typename Tuple>
 class FunctorImpl;
 
-template <typename Result, typename ... Args>
+template <typename Ret, typename ... Args>
 class Functor
 {
 public:
-	using Impl = FunctorImpl<Result, Args...>;
+	using Params = std::tuple<Args...>;
+	using ResultType = Ret;
+	using Impl = FunctorImpl<Ret, std::tuple<Args...>>;
 
 public:
 	Functor ();
@@ -24,8 +26,9 @@ public:
 	Functor (PtrObj&& pObj, PtrMemFn pMemFn);
 
 	Functor& operator= (const Functor& rhs);
-	
-	Result operator() (Args&&... args);
+	// Functor& operator= (Functor&& rhs);
+
+	Ret operator() (Args&&... args);
 private:
 	std::unique_ptr<Impl> spImpl_;
 };
